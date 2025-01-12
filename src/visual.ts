@@ -68,6 +68,7 @@ export class Visual implements IVisual {
     private barSelection: DataSelection<BarchartDataPoint>;
     private xAxisContainer: Selection<SVGGElement>;
     private yAxisContainer: Selection<SVGGElement>;
+    private yAxisTitle: Selection<SVGGElement>;
 
     private hostService: IVisualHost;
 
@@ -110,6 +111,11 @@ export class Visual implements IVisual {
             .append('g')
             .classed('yAxis', true);
 
+        this.yAxisTitle = this.svg
+            .append('text')
+            .classed('yAxisTitle', true);
+
+
 
         this.settings = VisualSettings.getDefault() as VisualSettings;
     }
@@ -123,7 +129,6 @@ export class Visual implements IVisual {
         if (viewModel.IsNotValid) {
             return;
         }
-
 
         // set height and width of root SVG element using viewport passed by Power BI host
         this.svg.attr("height", options.viewport.height);
@@ -158,7 +163,9 @@ export class Visual implements IVisual {
             .attr("transform", "translate(" + plotArea.x + "," + (plotArea.height + plotArea.y) + ")")
             .call(d3.axisBottom(xScale));
 
-        d3.select(".xAxis").selectAll("text").style("font-size", viewModel.XAxisFontSize);
+        d3.select(".xAxis").selectAll("text")
+            .style("font-size", viewModel.XAxisFontSize)
+            .style("color", this.formattingSettings.DSGVOCard.colorFontColor.value.value);
 
         let maxValueY: number = d3.max(viewModel.DataPoints, (dataPoint: BarchartDataPoint) => +(dataPoint.Value));
 
@@ -184,7 +191,23 @@ export class Visual implements IVisual {
             .call(yAxis);
 
 
-        d3.select(".yAxis").selectAll("text").style("font-size", viewModel.YAxisFontSize);
+        d3.select(".yAxis").selectAll("text")
+        .style("font-size", viewModel.YAxisFontSize)
+        .style("color", this.formattingSettings.DSGVOCard.colorFontColor.value.value);
+
+        if (this.formattingSettings.YAxis.showYTitle.value === true){
+            this.yAxisTitle
+            .attr("x", - options.viewport.height / 2)
+            .attr("y", 25) // Adjust based on your margin
+            .attr("text-anchor", "middle")
+            .attr("transform", "rotate(-90)")
+            .style("font-size", `${this.formattingSettings.YAxis.yAxisFontSize.value}px`)
+            .style("color", this.formattingSettings.DSGVOCard.colorFontColor.value.value)
+            .text(this.formattingSettings.YAxis.yTitle.value);
+        } else {
+            this.yAxisTitle.text("");
+        }
+
 
         this.barSelection = this.barContainer
             .selectAll('.bar')
@@ -265,7 +288,7 @@ export class Visual implements IVisual {
             this.formattingSettings.DSGVOCard.colorBarColor.value.value :
             this.settings.barchartProperties.barColor.solid.color;
 
-            
+
         // sort dataset rows by measure value instead of category value
         if (sortBySize) {
             barchartDataPoints.sort((x, y) => { return y.Value - x.Value })
