@@ -8,5 +8,6 @@
     "F_BackColor" : "Background color",
     "F_Title" : "Title",
     "F_showTitle" : "Show title",
-    "F_YAxis" : "Y axis"
+    "F_YAxis" : "Y axis",
+    "F_XAxis" : "X axis"
 }

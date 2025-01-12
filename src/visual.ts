@@ -258,7 +258,7 @@ export class Visual implements IVisual {
 
         // get persistent property values
         var sortBySize: boolean = this.settings.barchartProperties.sortBySize;
-        var xAxisFontSize: number = this.settings.barchartProperties.xAxisFontSize;
+        var xAxisFontSize: number = this.formattingSettings.XAxis.xAxisFontSize.value;
         var yAxisFontSize: number = this.formattingSettings.YAxis.yAxisFontSize.value;
         var barColor: string = typeof (this.settings.barchartProperties.barColor) == "string" ?
             this.formattingSettings.DSGVOCard.colorBarColor.value.value :

@@ -8,5 +8,6 @@
     "F_BackColor" : "Hintergrundfarbe",
     "F_Title" : "Titel",
     "F_showTitle" : "Titel anzeigen",
-    "F_YAxis" : "Y-Achse"
+    "F_YAxis" : "Y-Achse",
+    "F_XAxis" : "X-Achse"
 }

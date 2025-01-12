@@ -13,14 +13,14 @@ import powerbi from "powerbi-visuals-api";
 import Fill = powerbi.Fill;
 
 export class VisualSettings extends DataViewObjectsParser {
-  public barchartProperties: BarchartProperties = new BarchartProperties();
+    public barchartProperties: BarchartProperties = new BarchartProperties();
 }
 
 export class BarchartProperties {
-  sortBySize: boolean = true;
-  xAxisFontSize: number = 10;
-  yAxisFontSize: number = 10;
-  barColor: Fill = { "solid": { "color": "#018a80" } }; // default color is  teal
+    sortBySize: boolean = true;
+    xAxisFontSize: number = 10;
+    yAxisFontSize: number = 10;
+    barColor: Fill = { "solid": { "color": "#018a80" } }; // default color is  teal
 }
 
 /**
@@ -64,7 +64,7 @@ class DataPointCardSettings extends FormattingSettingsCard {
 
 class DSGVOCardSettings extends FormattingSettingsCard {
     otherName = new formattingSettings.TextInput({
-        placeholder:"otherName",
+        placeholder: "otherName",
         name: "otherName",
         displayNameKey: "F_Othername",
         value: "Other"
@@ -75,7 +75,7 @@ class DSGVOCardSettings extends FormattingSettingsCard {
         displayNameKey: "F_OtherLimit",
         value: 5
     });
- 
+
     fontSize = new formattingSettings.NumUpDown({
         name: "fontSize",
         displayNameKey: "F_FontSize",
@@ -102,17 +102,17 @@ class DSGVOCardSettings extends FormattingSettingsCard {
 
     name: string = "dsgvoSettings";
     displayNameKey: string = "F_DSGVOSettings";
-    slices: Array<FormattingSettingsSlice> = [this.otherName, this.otherLimit, this.fontSize, this.colorBackColor, this.colorFontColor,  this.colorBarColor];
+    slices: Array<FormattingSettingsSlice> = [this.otherName, this.otherLimit, this.fontSize, this.colorBackColor, this.colorFontColor, this.colorBarColor];
 }
 
 class YAxisSettings extends FormattingSettingsCard {
     yTitle = new formattingSettings.TextInput({
-        placeholder:"yTitle",
+        placeholder: "yTitle",
         name: "yTitle",
         displayNameKey: "F_Title",
-        value:""
+        value: ""
     });
- 
+
     showYTitle = new formattingSettings.ToggleSwitch({
         name: "showYTitle",
         displayNameKey: "F_showTitle",
@@ -130,6 +130,31 @@ class YAxisSettings extends FormattingSettingsCard {
     slices: Array<FormattingSettingsSlice> = [this.yTitle, this.showYTitle, this.yAxisFontSize];
 }
 
+class XAxisSettings extends FormattingSettingsCard {
+    xTitle = new formattingSettings.TextInput({
+        placeholder: "xTitle",
+        name: "xTitle",
+        displayNameKey: "F_Title",
+        value: ""
+    });
+
+    showXTitle = new formattingSettings.ToggleSwitch({
+        name: "showXTitle",
+        displayNameKey: "F_showTitle",
+        value: false
+    });
+
+    xAxisFontSize = new formattingSettings.NumUpDown({
+        name: "xAxisFontSize",
+        displayNameKey: "F_FontSize",
+        value: 10
+    });
+
+    name: string = "XAxis";
+    displayNameKey: string = "F_XAxis";
+    slices: Array<FormattingSettingsSlice> = [this.xTitle, this.showXTitle, this.xAxisFontSize];
+}
+
 
 /**
 * visual settings model class
@@ -140,6 +165,7 @@ export class VisualFormattingSettingsModel extends FormattingSettingsModel {
     dataPointCard = new DataPointCardSettings();
     DSGVOCard = new DSGVOCardSettings();
     YAxis = new YAxisSettings();
+    XAxis = new XAxisSettings();
 
-    cards = [this.DSGVOCard, this.YAxis, this.dataPointCard];
+    cards = [this.DSGVOCard, this.YAxis, this.XAxis, this.dataPointCard];
 }

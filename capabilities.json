@@ -115,6 +115,25 @@
                     }
                 }
             }
+        },
+        "XAxis": {
+            "properties": {
+                "xTitle": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "showXTitle": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "xAxisFontSize": {
+                    "type": {
+                        "numeric": true
+                    }
+                }
+            }
         }
     },
     "dataViewMappings": [
