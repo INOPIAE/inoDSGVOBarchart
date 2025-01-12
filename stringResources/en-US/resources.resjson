@@ -1,0 +1,12 @@
+{
+    "F_DSGVOSettings" : "DSGVO settings",
+    "F_Othername" : "Text for other",
+    "F_OtherLimit" : "Less than",
+    "F_FontSize" : "Font size",
+    "F_FontColor" : "Font color",
+    "F_BarColor" : "Bar color",
+    "F_BackColor" : "Background color",
+    "F_Title" : "Title",
+    "F_showTitle" : "Show title",
+    "F_YAxis" : "Y axis"
+}

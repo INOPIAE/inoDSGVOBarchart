@@ -28,6 +28,9 @@ import ISelectionManager = powerbi.extensibility.ISelectionManager;
 import { valueFormatter as vf, textMeasurementService as tms } from "powerbi-visuals-utils-formattingutils";
 import IValueFormatter = vf.IValueFormatter;
 
+import ILocalizationManager = powerbi.extensibility.ILocalizationManager;
+import IVisualEventService = powerbi.extensibility.IVisualEventService;
+
 import { VisualSettings, BarchartProperties } from './settings';
 import { VisualFormattingSettingsModel } from "./settings";
 
@@ -69,6 +72,7 @@ export class Visual implements IVisual {
     private hostService: IVisualHost;
 
     private settings: VisualSettings;
+    private localizationManager: ILocalizationManager;
 
     private viewModel: BarchartViewModel;
 
@@ -81,7 +85,8 @@ export class Visual implements IVisual {
 
     constructor(options: VisualConstructorOptions) {
         console.log('Visual constructor', options);
-        this.formattingSettingsService = new FormattingSettingsService();
+        this.localizationManager = options.host.createLocalizationManager();
+        this.formattingSettingsService = new FormattingSettingsService(this.localizationManager);
 
         this.hostService = options.host;
 
@@ -254,7 +259,7 @@ export class Visual implements IVisual {
         // get persistent property values
         var sortBySize: boolean = this.settings.barchartProperties.sortBySize;
         var xAxisFontSize: number = this.settings.barchartProperties.xAxisFontSize;
-        var yAxisFontSize: number = this.settings.barchartProperties.yAxisFontSize;
+        var yAxisFontSize: number = this.formattingSettings.YAxis.yAxisFontSize.value;
         var barColor: string = typeof (this.settings.barchartProperties.barColor) == "string" ?
             this.formattingSettings.DSGVOCard.colorBarColor.value.value :
             this.settings.barchartProperties.barColor.solid.color;

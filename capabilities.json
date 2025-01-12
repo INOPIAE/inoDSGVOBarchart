@@ -96,6 +96,25 @@
                     }
                 }
             }
+        },
+        "YAxis": {
+            "properties": {
+                "yTitle": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "showYTitle": {
+                    "type": {
+                        "bool": true
+                    }
+                },
+                "yAxisFontSize": {
+                    "type": {
+                        "numeric": true
+                    }
+                }
+            }
         }
     },
     "dataViewMappings": [

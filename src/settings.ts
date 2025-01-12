@@ -105,6 +105,32 @@ class DSGVOCardSettings extends FormattingSettingsCard {
     slices: Array<FormattingSettingsSlice> = [this.otherName, this.otherLimit, this.fontSize, this.colorBackColor, this.colorFontColor,  this.colorBarColor];
 }
 
+class YAxisSettings extends FormattingSettingsCard {
+    yTitle = new formattingSettings.TextInput({
+        placeholder:"yTitle",
+        name: "yTitle",
+        displayNameKey: "F_Title",
+        value:""
+    });
+ 
+    showYTitle = new formattingSettings.ToggleSwitch({
+        name: "showYTitle",
+        displayNameKey: "F_showTitle",
+        value: false
+    });
+
+    yAxisFontSize = new formattingSettings.NumUpDown({
+        name: "yAxisFontSize",
+        displayNameKey: "F_FontSize",
+        value: 10
+    });
+
+    name: string = "YAxis";
+    displayNameKey: string = "F_YAxis";
+    slices: Array<FormattingSettingsSlice> = [this.yTitle, this.showYTitle, this.yAxisFontSize];
+}
+
+
 /**
 * visual settings model class
 *
@@ -113,6 +139,7 @@ export class VisualFormattingSettingsModel extends FormattingSettingsModel {
     // Create formatting settings model formatting cards
     dataPointCard = new DataPointCardSettings();
     DSGVOCard = new DSGVOCardSettings();
+    YAxis = new YAxisSettings();
 
-    cards = [this.DSGVOCard, this.dataPointCard];
+    cards = [this.DSGVOCard, this.YAxis, this.dataPointCard];
 }
