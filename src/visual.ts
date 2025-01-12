@@ -119,6 +119,7 @@ export class Visual implements IVisual {
             return;
         }
 
+
         // set height and width of root SVG element using viewport passed by Power BI host
         this.svg.attr("height", options.viewport.height);
         this.svg.attr("width", options.viewport.width);
@@ -195,7 +196,7 @@ export class Visual implements IVisual {
             .attr("width", xScale.bandwidth())
             .attr("height", (dataPoint: BarchartDataPoint) => (plotArea.height - yScale(Number(dataPoint.Value))))
             .style("fill", (dataPoint: BarchartDataPoint) => viewModel.BarColor);
-console.log("Color: " + viewModel.BarColor);
+
         this.barSelection
             .exit()
             .remove();
@@ -220,14 +221,30 @@ console.log("Color: " + viewModel.BarColor);
 
         var barchartDataPoints: BarchartDataPoint[] = [];
 
+        var strOther: string = this.formattingSettings.DSGVOCard.otherName.value;
+        var otherValue: number = 0;
+        var intOtherMargin: number = this.formattingSettings.DSGVOCard.otherLimit.value;
+
+
         for (var i = 0; i < categoryValues.length; i++) {
             // get category name and category value
             var category: string = <string>categoryNames[i];
             var categoryValue: number = <number>categoryValues[i];
-            // add new data point to barchartDataPoints collection
+            if (categoryValue < intOtherMargin) {
+                otherValue += categoryValue;
+            } else {
+                // add new data point to barchartDataPoints collection
+                barchartDataPoints.push({
+                    Category: category,
+                    Value: categoryValue
+                });
+            }
+        }
+
+        if (otherValue > 0) {
             barchartDataPoints.push({
-                Category: category,
-                Value: categoryValue
+                Category: strOther,
+                Value: otherValue
             });
         }
 
@@ -239,14 +256,15 @@ console.log("Color: " + viewModel.BarColor);
         var xAxisFontSize: number = this.settings.barchartProperties.xAxisFontSize;
         var yAxisFontSize: number = this.settings.barchartProperties.yAxisFontSize;
         var barColor: string = typeof (this.settings.barchartProperties.barColor) == "string" ?
-            this.settings.barchartProperties.barColor :
+            this.formattingSettings.DSGVOCard.colorBarColor.value.value :
             this.settings.barchartProperties.barColor.solid.color;
 
+            
         // sort dataset rows by measure value instead of category value
         if (sortBySize) {
             barchartDataPoints.sort((x, y) => { return y.Value - x.Value })
         }
-      
+
         // return view model to update method
         return {
             IsNotValid: false,

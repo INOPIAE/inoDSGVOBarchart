@@ -50,6 +50,52 @@
                     }
                 }
             }
+        },
+        "dsgvoSettings": {
+            "properties": {
+                "otherName": {
+                    "type": {
+                        "text": true
+                    }
+                },
+                "otherLimit": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "fontSize": {
+                    "type": {
+                        "numeric": true
+                    }
+                },
+                "fontColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "barColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                },
+                "backColor": {
+                    "type": {
+                        "fill": {
+                            "solid": {
+                                "color": true
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "dataViewMappings": [

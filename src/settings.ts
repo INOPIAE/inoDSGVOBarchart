@@ -62,6 +62,49 @@ class DataPointCardSettings extends FormattingSettingsCard {
     slices: Array<FormattingSettingsSlice> = [this.defaultColor, this.showAllDataPoints, this.fill, this.fillRule, this.fontSize];
 }
 
+class DSGVOCardSettings extends FormattingSettingsCard {
+    otherName = new formattingSettings.TextInput({
+        placeholder:"otherName",
+        name: "otherName",
+        displayNameKey: "F_Othername",
+        value: "Other"
+    });
+
+    otherLimit = new formattingSettings.NumUpDown({
+        name: "otherLimit",
+        displayNameKey: "F_OtherLimit",
+        value: 5
+    });
+ 
+    fontSize = new formattingSettings.NumUpDown({
+        name: "fontSize",
+        displayNameKey: "F_FontSize",
+        value: 10
+    });
+
+    colorFontColor = new formattingSettings.ColorPicker({
+        name: "fontColor",
+        displayNameKey: "F_FontColor",
+        value: { value: "" }
+    });
+
+    colorBarColor = new formattingSettings.ColorPicker({
+        name: "barColor",
+        displayNameKey: "F_BarColor",
+        value: { value: "#018a80" }
+    });
+
+    colorBackColor = new formattingSettings.ColorPicker({
+        name: "backColor",
+        displayNameKey: "F_BackColor",
+        value: { value: "" }
+    });
+
+    name: string = "dsgvoSettings";
+    displayNameKey: string = "F_DSGVOSettings";
+    slices: Array<FormattingSettingsSlice> = [this.otherName, this.otherLimit, this.fontSize, this.colorBackColor, this.colorFontColor,  this.colorBarColor];
+}
+
 /**
 * visual settings model class
 *
@@ -69,6 +112,7 @@ class DataPointCardSettings extends FormattingSettingsCard {
 export class VisualFormattingSettingsModel extends FormattingSettingsModel {
     // Create formatting settings model formatting cards
     dataPointCard = new DataPointCardSettings();
+    DSGVOCard = new DSGVOCardSettings();
 
-    cards = [this.dataPointCard];
+    cards = [this.DSGVOCard, this.dataPointCard];
 }
