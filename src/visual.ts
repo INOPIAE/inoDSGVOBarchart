@@ -142,7 +142,8 @@ export class Visual implements IVisual {
         };
 
         this.barContainer
-            .attr("transform", "translate(" + plotArea.x + "," + plotArea.y + ")");
+            .attr("transform", "translate(" + plotArea.x + "," + plotArea.y + ")")
+            .style('fill', this.formattingSettings.DSGVOCard.colorBackColor.value.value);
 
         this.plotBackground.attr("width", plotArea.width);
         this.plotBackground.attr("height", plotArea.height);

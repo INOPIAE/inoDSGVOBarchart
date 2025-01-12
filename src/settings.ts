@@ -97,7 +97,7 @@ class DSGVOCardSettings extends FormattingSettingsCard {
     colorBackColor = new formattingSettings.ColorPicker({
         name: "backColor",
         displayNameKey: "F_BackColor",
-        value: { value: "" }
+        value: { value: "#ffffff" }
     });
 
     name: string = "dsgvoSettings";
