@@ -1,4 +1,6 @@
 {
+    "Category_Data" : "Kategorie-Daten",
+    "Measure_Data" : "Werte",
     "F_DSGVOSettings" : "DSGVO Einstellungen",
     "F_Othername" : "Text für Sonstiges",
     "F_OtherLimit" : "Kleiner als",

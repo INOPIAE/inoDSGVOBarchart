@@ -1,5 +1,7 @@
 {
-    "F_DSGVOSettings" : "DSGVO settings",
+    "Category_Data" : "Category data",
+    "Measure_Data" : "Measure data",
+       "F_DSGVOSettings" : "DSGVO settings",
     "F_Othername" : "Text for other",
     "F_OtherLimit" : "Less than",
     "F_FontSize" : "Font size",
