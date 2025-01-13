@@ -5,9 +5,9 @@
         "guid": "inoDSGVOBarChart4BBE731E106142D3808DB7B9627786E6",
         "visualClassName": "Visual",
         "version": "0.0.0.1",
-        "description": "",
-        "supportUrl": "",
-        "gitHubUrl": ""
+        "description": "Bar chart to match the conditions of GDPR",
+        "supportUrl": "https://github.com/INOPIAE/inoDSGVOBarchart",
+        "gitHubUrl": "https://github.com/INOPIAE/inoDSGVOBarchart"
     },
     "apiVersion": "5.3.0",
     "author": {
