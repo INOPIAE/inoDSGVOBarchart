@@ -10,6 +10,7 @@
   "scripts": {
     "pbiviz": "pbiviz",
     "start": "pbiviz start",
+    "build": "pbiviz package",
     "package": "pbiviz package",
     "lint": "npx eslint ."
   },
