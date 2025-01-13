@@ -1,0 +1,53 @@
+name: Release Power BI Custom Visual
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # Trigger workflow on version tags like v1.0.0
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Set up Node.js
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '16'
+
+      # Install dependencies
+      - name: Install dependencies
+        run: npm ci
+
+      # Install pbiviz CLI
+      - name: Install pbiviz CLI
+        run: npm install -g powerbi-visuals-tools
+
+      # Build the custom visual
+      - name: Build custom visual
+        run: npm run build
+
+      # Package the custom visual
+      - name: Package custom visual
+        run: pbiviz package
+
+      # Rename and prepare the .pbiviz file
+      - name: Prepare release asset
+        run: mv dist/*.pbiviz inoDSGVOBarchart-${{ github.ref_name }}.pbiviz
+
+      # Create GitHub release and upload the .pbiviz file
+      - name: Create GitHub release
+        uses: softprops/action-gh-release@v1
+        with:
+          files: inoDSGVOBarchart-${{ github.ref_name }}.pbiviz
+          name: Power BI Visual inoDSGVOBarchart Release ${{ github.ref_name }}
+          tag_name: ${{ github.ref_name }}
+          body: |
+            This release contains the Power BI visual inoDSGVOBarchart package for version ${{ github.ref_name }}.
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
